@@ -19,7 +19,11 @@ def create_app(config = config_dict["dev"]):
     #  CORS(app, resources={r"/*": {"origins": "*",
     #                              "methods": ["GET", "POST", "PATCH", "DELETE"],
     #                              "supports_credentials": True}})
-    
+     def create_database():
+         with app.app_context():
+            db.create_all()
+            print("database tables created")
+     
      with app.app_context():
             db.create_all()
             print("database tables created")
@@ -31,10 +35,11 @@ def create_app(config = config_dict["dev"]):
      
      @app.get("/database/danger")
      def drop_database_tables():
-          print("Hello world")
           with app.app_context():
             db.drop_all()
             print("all database tables droped")
+            create_database()
+            print("database tables created again")
             return jsonify({"success": "All database tables dropped"}) 
 
      @app.errorhandler(404)
