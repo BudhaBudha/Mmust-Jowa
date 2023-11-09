@@ -22,11 +22,19 @@ def create_app(config = config_dict["dev"]):
     
      with app.app_context():
             db.create_all()
+            print("database tables created")
 
      @app.after_request
      def add_security_header(resp):
          resp.headers["Content-Security-Policy"] = "default-src \'self\'"
          return resp
+     
+    #  @app.get("/database/danger")
+    #  def drop_database_tables():
+    #       with app.app_context():
+    #         db.drop_all()
+    #         print("all database tables droped")
+    #         return jsonify({"success": "All database tables dropped"}) 
 
      @app.errorhandler(404)
      def handle_not_found(e):
