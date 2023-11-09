@@ -20,7 +20,8 @@ def create_app(config = config_dict["dev"]):
     #                              "methods": ["GET", "POST", "PATCH", "DELETE"],
     #                              "supports_credentials": True}})
     
-     create_database(app=app)
+     with app.app_context():
+            db.create_all()
 
      @app.after_request
      def add_security_header(resp):
@@ -47,10 +48,3 @@ def create_app(config = config_dict["dev"]):
          return jsonify({"Hello there":" Welcome to JOWA MMUST blogging web app" })
      
      return app
-
-
-def create_database(app):
-    if not path.exists("src/database.db"):
-        with app.app_context():
-            db.create_all()
-            print("database created")
