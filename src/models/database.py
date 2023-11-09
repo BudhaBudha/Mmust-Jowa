@@ -34,9 +34,9 @@ class User(db.Model):
 
 class News(db.Model):
         id = db.Column(db.Integer, primary_key=True, index=True)
-        title = db.Column(db.String(50), nullable=False)
-        slug = db.Column(db.String(100), nullable=False)
-        image_id = db.Column(db.String(100), nullable=False, unique=True)
+        title = db.Column(db.String(500), nullable=False)
+        slug = db.Column(db.String(1000), nullable=False)
+        image_id = db.Column(db.String(1000), nullable=False, unique=True)
         body = db.Column(db.Text, nullable=False)
         date_created = db.Column(db.DateTime, default=datetime.now)
         published_on = db.Column(db.DateTime, default = datetime.now, onupdate=datetime.now)
@@ -44,9 +44,9 @@ class News(db.Model):
         
 class Business(db.Model):
         id = db.Column(db.Integer, primary_key=True, index=True)
-        title = db.Column(db.String(100), nullable=False)
-        slug = db.Column(db.String(100), nullable=False)
-        image_id = db.Column(db.String(100), nullable=False, unique=True)
+        title = db.Column(db.String(1000), nullable=False)
+        slug = db.Column(db.String(1000), nullable=False)
+        image_id = db.Column(db.String(1000), nullable=False, unique=True)
         body = db.Column(db.Text, nullable=False)
         date_created = db.Column(db.DateTime, default=datetime.now)
         published_on = db.Column(db.DateTime, default = datetime.now, onupdate=datetime.now)
@@ -55,9 +55,9 @@ class Business(db.Model):
 
 class Sports(db.Model):
         id = db.Column(db.Integer, primary_key=True, index=True)
-        title = db.Column(db.String(100), nullable=False)
-        slug = db.Column(db.String(100), nullable=False)
-        image_id = db.Column(db.String(100), nullable=False, unique=True)
+        title = db.Column(db.String(1000), nullable=False)
+        slug = db.Column(db.String(1000), nullable=False)
+        image_id = db.Column(db.String(1000), nullable=False, unique=True)
         body = db.Column(db.Text, nullable=False)
         date_created = db.Column(db.DateTime, default=datetime.now)
         published_on = db.Column(db.DateTime, default = datetime.now, onupdate=datetime.now)
@@ -66,9 +66,9 @@ class Sports(db.Model):
      
 class Entertainment(db.Model):
         id = db.Column(db.Integer, primary_key=True, index=True)
-        title = db.Column(db.String(100), nullable=False)
-        slug = db.Column(db.String(100), nullable=False)
-        image_id = db.Column(db.String(100), nullable=False, unique=True)
+        title = db.Column(db.String(1000), nullable=False)
+        slug = db.Column(db.String(1000), nullable=False)
+        image_id = db.Column(db.String(1000), nullable=False, unique=True)
         body = db.Column(db.Text, nullable=False)
         date_created = db.Column(db.DateTime, default=datetime.now)
         published_on = db.Column(db.DateTime, default = datetime.now, onupdate=datetime.now)

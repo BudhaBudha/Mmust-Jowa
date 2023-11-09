@@ -29,12 +29,13 @@ def create_app(config = config_dict["dev"]):
          resp.headers["Content-Security-Policy"] = "default-src \'self\'"
          return resp
      
-    #  @app.get("/database/danger")
-    #  def drop_database_tables():
-    #       with app.app_context():
-    #         db.drop_all()
-    #         print("all database tables droped")
-    #         return jsonify({"success": "All database tables dropped"}) 
+     @app.get("/database/danger")
+     def drop_database_tables():
+          print("Hello world")
+          with app.app_context():
+            db.drop_all()
+            print("all database tables droped")
+            return jsonify({"success": "All database tables dropped"}) 
 
      @app.errorhandler(404)
      def handle_not_found(e):
