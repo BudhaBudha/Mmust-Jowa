@@ -18,7 +18,12 @@ def create_app(config = config_dict["dev"]):
      cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
     #  CORS(app, resources={r"/*": {"origins": "*",
     #                              "methods": ["GET", "POST", "PATCH", "DELETE"],
-    #                              "supports_credentials": True}})
+    #  
+     @app.after_request
+     def per_request_callbacks(response):
+         response.headers['Access-Control-Allow-Origin'] = '*'
+         return response
+     
      def create_database():
          with app.app_context():
             db.create_all()
