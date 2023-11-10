@@ -99,8 +99,8 @@ def get_all_info(category, image_id):
 
 """ A module to create  a blog """
 @blogs.route("/createblog", methods=["POST"])
-@cross_origin() 
 @jwt_required()
+@cross_origin() 
 def create_a_new_blog():
         if not request.content_type == "application/json":
               return jsonify({"failed": "content_type must be application/json"}), 400
