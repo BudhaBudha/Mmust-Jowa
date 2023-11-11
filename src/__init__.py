@@ -20,7 +20,7 @@ def create_app(config = config_dict["dev"]):
     #  
 
      required_headers = ["Content-Type", "Authorization"]
-     cors = CORS(app, resources={r"/api/v1/*": {
+     cors = CORS(app, resources={r"/*": {
       "origins": "*",
       "methods": ["GET", "POST", "PATCH", "DELETE"],
       "supports_credentials": True,
