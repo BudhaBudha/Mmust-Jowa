@@ -1,7 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from src.config.config import config_dict
 from src.models.database import db, migrate, User
-from os import path
 from src.auth.auth import auth
 from src.views.blogs import blogs
 from flask_jwt_extended import JWTManager
@@ -15,28 +14,32 @@ def create_app(config = config_dict["dev"]):
      db.init_app(app=app)
      migrate.init_app(app=app)
      JWTManager(app)
-     cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+    #  cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
     #  CORS(app, resources={r"/*": {"origins": "*",
     #                              "methods": ["GET", "POST", "PATCH", "DELETE"],
     #  
-     @app.after_request
-     def per_request_callbacks(response):
-         response.headers['Access-Control-Allow-Origin'] = '*'
-         return response
-     
-     def create_database():
-         with app.app_context():
-            db.create_all()
-            print("database tables created")
-     
-     with app.app_context():
-            db.create_all()
-            print("database tables created")
+
+     required_headers = ["Content-Type", "Authorization"]
+     cors = CORS(app, resources={r"/api/v1/*": {
+      "origins": "*",
+      "methods": ["GET", "POST", "PATCH", "DELETE"],
+      "supports_credentials": True,
+      "allow_headers": required_headers
+     }})
+
+
+     @app.before_request
+     def before_request():
+        if "Origin" in request.headers:
+            request.headers.add('Access-Control-Allow-Origin', '*')
+            request.headers.add('Access-Control-Allow-Headers', ', '.join(required_headers))
 
      @app.after_request
-     def add_security_header(resp):
-         resp.headers["Content-Security-Policy"] = "default-src \'self\'"
-         return resp
+     def add_security_header(response):
+        response.headers["Content-Security-Policy"] = "default-src 'self'"
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Headers"] = ", ".join(required_headers)
+        return response
      
      @app.get("/database/danger")
      def drop_database_tables():
@@ -58,12 +61,10 @@ def create_app(config = config_dict["dev"]):
      
      app.register_blueprint(auth)
      app.register_blueprint(blogs)
-     
-     @app.route("/")
-     def index():
-         return jsonify({"Hello there":" Welcome to JOWA MMUST blogging web app" })
-        
-     def index():
-         return jsonify({"Hello there":" Welcome to JOWA MMUST blogging web app" })
+
+     def create_database():
+         with app.app_context():
+            db.create_all()
+            print("database tables created")
      
      return app
