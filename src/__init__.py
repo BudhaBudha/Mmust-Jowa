@@ -28,11 +28,11 @@ def create_app(config = config_dict["dev"]):
      }})
 
 
-     @app.before_request
-     def before_request():
-        if "Origin" in request.headers:
-            request.headers.add('Access-Control-Allow-Origin', '*')
-            request.headers.add('Access-Control-Allow-Headers', ', '.join(required_headers))
+    #  @app.before_request
+    #  def before_request():
+    #     if "Origin" in request.headers:
+    #         request.headers.add('Access-Control-Allow-Origin', '*')
+    #         request.headers.add('Access-Control-Allow-Headers', ', '.join(required_headers))
 
      @app.after_request
      def add_security_header(response):
