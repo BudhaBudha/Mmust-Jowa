@@ -9,8 +9,8 @@ class DevConfig(Config):
      SQLALCHEMY_TRACK_MODIFICATION = False
      DEBUG = True
      JWT_SECRET_KEY = config("JWT_SECRET_KEY") 
-     JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=15)
-     JWT_REFRESH_TOKEN_EXPIRES = timedelta(minutes=15)
+     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=2)
+     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=2)
      CORS_HEADERS = "Content-Type"
 
 
