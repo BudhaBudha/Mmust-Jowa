@@ -299,7 +299,7 @@ def create_a_new_blog():
         file.save(file_path)
         print("File saved, waiting to be sent to cloudinary ")
         data["image_id"] = send_image_to_cloudinary(filename=filename)
-        print(f"{filename} send to cloudinary")
+        print(f"{filename} sent to cloudinary")
 
     except Exception as e:
         print(f"Opps Antony, An error has occured: {str(e)}")
