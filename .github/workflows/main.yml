@@ -1,26 +1,28 @@
+name: 🚀 Deploy Backend Api on push
+
 on: 
   push:
     branches:
       - flask
-name: 🚀 Deploy website on push
 
 jobs:
-  web-deploy:
+  deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
+    
     steps:
-    - name: 🚚 Get latest code
+    - name: 🚚 Checkout latest code
       uses: actions/checkout@v3
 
-    - name: Use Node.js 20
-      uses: actions/setup-node@v2
+    - name: Set up Python Env
+      uses: actions/setup-python@v2
       with:
-        node-version: '20'
+        python-version: 3.8
       
-    - name: 🔨 Build Project
+    - name: 🔨 Install dependecies
       run: |
-        npm install
-        npm run build
+        pip install --upgrade pip
+        pip install -r requirements.txt
         echo "FTP Server: $FTP_SERVER"
     
     - name: 📂 Sync files
