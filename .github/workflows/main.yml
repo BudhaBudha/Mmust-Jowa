@@ -1,7 +1,13 @@
+<<<<<<< HEAD
+=======
+name: 🚀 Deploy Backend Api on push
+
+>>>>>>> flask
 on: 
   push:
     branches:
       - flask
+<<<<<<< HEAD
 name: 🚀 Deploy website on push
 
 jobs:
@@ -21,6 +27,27 @@ jobs:
       run: |
         npm install
         npm run build
+=======
+
+jobs:
+  deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🚚 Checkout latest code
+      uses: actions/checkout@v3
+
+    - name: Set up Python Env
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+      
+    - name: 🔨 Install dependecies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+>>>>>>> flask
         echo "FTP Server: $FTP_SERVER"
     
     - name: 📂 Sync files
@@ -30,4 +57,9 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         protocol: FTP
+<<<<<<< HEAD
         local-dir: ./dist/
+=======
+        # local-dir: ./dist/
+        # hello world again
+>>>>>>> flask
